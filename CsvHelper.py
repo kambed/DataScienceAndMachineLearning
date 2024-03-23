@@ -5,4 +5,6 @@ class CsvHelper:
 
     @staticmethod
     def read_csv():
-        return pd.read_csv("resources/Dry_Bean_Dataset.csv")
+        df = pd.read_csv("resources/Dry_Bean_Dataset.csv")
+        selected_types = ['DERMASON', 'SIRA', 'SEKER']
+        return df[df.Class.isin(selected_types)]
