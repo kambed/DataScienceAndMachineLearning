@@ -1,10 +1,10 @@
 import pandas as pd
 
 
-class CsvHelper:
+class DataCsvHelper:
 
     @staticmethod
-    def read_csv():
+    def read_csv(labels):
         df = pd.read_csv("resources/Dry_Bean_Dataset.csv")
-        selected_types = ['DERMASON', 'SIRA', 'SEKER']
+        selected_types = labels
         return df[df.Class.isin(selected_types)]
