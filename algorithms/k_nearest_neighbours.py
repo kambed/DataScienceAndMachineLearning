@@ -1,7 +1,7 @@
 from enum import Enum
 from sklearn.neighbors import KNeighborsClassifier
 
-from alghoritms.classification import Classification
+from algorithms.classification import Classification
 
 """
     KNearestNeighbours class

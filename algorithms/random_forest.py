@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestClassifier
 
-from alghoritms.classification import Classification
+from algorithms.classification import Classification
 
 
 class RandomForest(Classification):
