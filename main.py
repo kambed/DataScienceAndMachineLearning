@@ -1,7 +1,8 @@
-from ConfusionMatrixHelper import ConfusionMatrixHelper
-from DataCsvHelper import DataCsvHelper
-from DataSplitHelper import DataSplitHelper
-from NaiveBayes import NaiveBayes
+from helper.ConfusionMatrixHelper import ConfusionMatrixHelper
+from helper.DataCsvHelper import DataCsvHelper
+from helper.DataSplitHelper import DataSplitHelper
+from alghoritms.Alghoritm import Algorithm
+from alghoritms.NaiveBayes import NaiveBayes
 
 
 def execute_knn(learn_data, test_data):
@@ -22,19 +23,25 @@ def execute_decision_tree(learn_data, test_data):
     return [], []
 
 
+def execute_random_forest(learn_data, test_data):
+    return [], []
+
+
 if __name__ == '__main__':
-    algorithm = 'NAIVE_BAYES' # NAIVE_BAYES, KNN, SUPPORT_VECTOR, DECISION_TREE
+    algorithm = Algorithm.NAIVE_BAYES.value
     labels = ['DERMASON', 'SIRA', 'SEKER']
     splitter = DataSplitHelper(DataCsvHelper.read_csv(labels=labels), 0.3)
 
-    if algorithm == 'NAIVE_BAYES':
+    if algorithm == Algorithm.NAIVE_BAYES.value:
         predicted, expected = execute_naive_bayes(*splitter.split())
-    elif algorithm == 'KNN':
+    elif algorithm == Algorithm.KNN.value:
         predicted, expected = execute_knn(*splitter.split())
-    elif algorithm == 'SUPPORT_VECTOR':
+    elif algorithm == Algorithm.SUPPORT_VECTOR.value:
         predicted, expected = execute_support_vector_machine(*splitter.split())
-    elif algorithm == 'DECISION_TREE':
+    elif algorithm == Algorithm.DECISION_TREE.value:
         predicted, expected = execute_decision_tree(*splitter.split())
+    elif algorithm == Algorithm.RANDOM_FOREST.value:
+        predicted, expected = execute_random_forest(*splitter.split())
     else:
         raise NotImplementedError(f"Algorithm {algorithm} not found!")
 
