@@ -1,0 +1,5 @@
+{
+  "algorithm": "DECISION_TREE",
+  "max_depth": 5,
+  "min_samples_leaf": 2
+}
