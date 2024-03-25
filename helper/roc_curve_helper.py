@@ -3,7 +3,7 @@ from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import label_binarize, LabelEncoder
 
 """
-    This module is used to help plot the ROC curve for a binary classification model.
+    Helper class for ROC curve
 """
 
 
