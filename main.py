@@ -9,7 +9,7 @@ def execute_knn(learn_data, test_data):
 
 
 def execute_naive_bayes(learn_data, test_data):
-    naive_bayes = NaiveBayes(learn_data, test_data)
+    naive_bayes = NaiveBayes(learn_data, test_data, "GaussianNB")
     naive_bayes.train()
     return naive_bayes.predict_test_data()
 
