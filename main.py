@@ -4,6 +4,7 @@ from helper.data_csv_helper import DataCsvHelper
 from helper.data_split_helper import DataSplitHelper
 from alghoritms.alghoritm import Algorithm
 from alghoritms.naive_bayes import NaiveBayes
+from helper.roc_curve_helper import RocCurveHelper
 
 
 def execute_knn(n_neighbors, metric, learn_data, test_data):
@@ -57,3 +58,5 @@ if __name__ == '__main__':
     cmh = ConfusionMatrixHelper(expected, predicted, labels)
     cmh.display_confusion_matrix()
     cmh.display_classification_report()
+    roc = RocCurveHelper(expected, predicted)
+    roc.plot_roc_curve()
