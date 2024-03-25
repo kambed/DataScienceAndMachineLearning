@@ -1,10 +1,12 @@
 from sklearn.naive_bayes import GaussianNB
 
+from alghoritms.data_model import DataModel
 
-class NaiveBayes:
+
+class NaiveBayes(DataModel):
+
     def __init__(self, learn_data, test_data):
-        self.learn_data = learn_data
-        self.test_data = test_data
+        super().__init__(learn_data, test_data)
         self.model = GaussianNB()
 
     def train(self):
