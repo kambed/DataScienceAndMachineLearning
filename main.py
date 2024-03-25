@@ -3,7 +3,7 @@ from alghoritms.decision_tree import DecisionTree
 from alghoritms.k_nearest_neighbours import KNearestNeighbours, Metric
 from alghoritms.naive_bayes import NaiveBayes
 from alghoritms.random_forest import RandomForest
-from helper.argument_helepr import ArgumentHelper
+from helper.argument_helper import ArgumentHelper
 from helper.confusion_matrix_helper import ConfusionMatrixHelper
 from helper.data_csv_helper import DataCsvHelper
 from helper.data_split_helper import DataSplitHelper
