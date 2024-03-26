@@ -1,7 +1,7 @@
 from algorithms.algorithm import Algorithm
 from algorithms.decision_tree import DecisionTree
 from algorithms.k_nearest_neighbours import KNearestNeighbours, Metric
-from algorithms.naive_bayes import NaiveBayes
+from algorithms.naive_bayes import NaiveBayes, NaiveBayesType
 from algorithms.random_forest import RandomForest
 from helper.argument_helper import ArgumentHelper
 from helper.confusion_matrix_helper import ConfusionMatrixHelper
@@ -13,7 +13,8 @@ from helper.roc_curve_helper import RocCurveHelper
 def create_classification_algorithm(learn_data, test_data):
     algorithm = ArgumentHelper.get_enum_argument("algorithm", Algorithm)
     if algorithm == Algorithm.NAIVE_BAYES:
-        return NaiveBayes(learn_data, test_data)
+        naive_bayes_type = ArgumentHelper.get_enum_argument("naive_bayes_type", NaiveBayesType)
+        return NaiveBayes(learn_data, test_data, naive_bayes_type)
     elif algorithm == Algorithm.DECISION_TREE:
         max_depth = ArgumentHelper.get_int_argument("max_depth")
         min_samples_leaf = ArgumentHelper.get_int_argument("min_samples_leaf")
