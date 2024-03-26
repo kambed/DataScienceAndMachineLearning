@@ -1,0 +1,7 @@
+{
+  "algorithm": "KNN",
+  "max_depth": 5,
+  "min_samples_leaf": 2,
+  "n_neighbors": 5,
+  "metric": "EUCLIDEAN"
+}
