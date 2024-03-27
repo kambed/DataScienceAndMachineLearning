@@ -4,9 +4,10 @@ class Classification:
         self.test_data = test_data
         self.model = model
 
-    def train(self):
-        x = self.learn_data.iloc[:, :-1].values
-        y = self.learn_data.iloc[:, -1].values
+    def train(self, part_of_data=1):
+        data_to_train = self.learn_data.sample(frac=part_of_data)
+        x = data_to_train.iloc[:, :-1].values
+        y = data_to_train.iloc[:, -1].values
         self.model.fit(x, y)
 
     def predict(self, x):
