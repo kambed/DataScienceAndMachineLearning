@@ -4,3 +4,4 @@ matplotlib~=3.5.1
 scikit-learn~=1.0.2
 enum
 json
+numpy~=1.21.5

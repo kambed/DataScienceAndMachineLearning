@@ -8,6 +8,7 @@ from helper.confusion_matrix_helper import ConfusionMatrixHelper
 from helper.data_csv_helper import DataCsvHelper
 from helper.data_split_helper import DataSplitHelper
 from helper.roc_curve_helper import RocCurveHelper
+from helper.learning_curve_helper import LearningCurveHelper
 
 
 def create_classification_algorithm(learn_data, test_data):
@@ -33,15 +34,25 @@ def create_classification_algorithm(learn_data, test_data):
 
 if __name__ == '__main__':
     labels = ['DERMASON', 'SIRA', 'SEKER']
-    splitter = DataSplitHelper(DataCsvHelper.read_csv(labels=labels), 0.3)
+    test_size = 0.3
 
-    classification = create_classification_algorithm(*splitter.split())
-    classification.train()
-    predicted, expected = classification.predict_test_data()
+    train_size = 1 - test_size
+    train_step = 0.05
+
+    splitter = DataSplitHelper(DataCsvHelper.read_csv(labels=labels), test_size)
+    learn_data, test_data = splitter.split()
+
+    classification = create_classification_algorithm(learn_data, test_data)
+
+    lch = LearningCurveHelper(classification, train_size, train_step)
+    predicted, expected = lch.train_and_predict()
 
     print("\n")
     cmh = ConfusionMatrixHelper(expected, predicted, labels)
     cmh.display_confusion_matrix()
     cmh.display_classification_report()
+
     roc = RocCurveHelper(actual=expected, predicted=predicted)
     roc.plot_roc_curve()
+
+    lch.display_learning_curve()
