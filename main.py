@@ -3,6 +3,7 @@ from algorithms.decision_tree import DecisionTree
 from algorithms.k_nearest_neighbours import KNearestNeighbours, Metric
 from algorithms.naive_bayes import NaiveBayes, NaiveBayesType
 from algorithms.random_forest import RandomForest
+from algorithms.support_vector import SupportVector, SupportVectorType
 from helper.argument_helper import ArgumentHelper
 from helper.confusion_matrix_helper import ConfusionMatrixHelper
 from helper.data_csv_helper import DataCsvHelper
@@ -28,6 +29,11 @@ def create_classification_algorithm(learn_data, test_data):
         n_neighbors = ArgumentHelper.get_int_argument("n_neighbors")
         metric = ArgumentHelper.get_enum_argument("metric", Metric)
         return KNearestNeighbours(learn_data=learn_data, test_data=test_data, n_neighbors=n_neighbors, metric=metric)
+    elif algorithm == Algorithm.SUPPORT_VECTOR:
+        kernel = ArgumentHelper.get_enum_argument("kernel", SupportVectorType)
+        c = ArgumentHelper.get_int_argument("c")
+        gamma = ArgumentHelper.get_int_argument("gamma")
+        return SupportVector(learn_data=learn_data, test_data=test_data, kernel=kernel, c=c, gamma=gamma)
     else:
         raise NotImplementedError(f"Algorithm {algorithm} not found!")
 
