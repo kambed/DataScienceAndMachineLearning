@@ -1,6 +1,6 @@
 {
   "algorithm": "SUPPORT_VECTOR",
-  "kernel": "rbf",
+  "kernel": "RBF",
   "c": 1.0,
-  "gamma": "scale"
+  "gamma": "SCALE"
 }
