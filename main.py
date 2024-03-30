@@ -41,13 +41,10 @@ def create_classification_algorithm(learn_data, test_data):
 if __name__ == '__main__':
     labels = ['DERMASON', 'SIRA', 'SEKER']
     test_size = 0.3
-
     train_size = 1 - test_size
     train_step = 0.05
 
-    splitter = DataSplitHelper(DataCsvHelper.read_csv(labels=labels), test_size)
-    learn_data, test_data = splitter.split()
-
+    learn_data, test_data = DataCsvHelper.read_csv_data()
     classification = create_classification_algorithm(learn_data, test_data)
 
     lch = LearningCurveHelper(classification, train_size, train_step)
