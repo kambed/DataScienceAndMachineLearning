@@ -9,23 +9,26 @@ class LearningCurveHelper:
         self.train_size = train_size
         self.train_step = train_step
         self.test_scores = []
+        self.test_scores_labels = []
         self.train_sizes = np.arange(train_step, train_size + train_step, train_step)
 
     def train_and_predict(self):
         for size in self.train_sizes:
-            self.classification.train(self.train_size, size)
+            learn_size, test_size = self.classification.train(self.train_size, size)
             predicted, expected = self.classification.predict_test_data()
             self.test_scores.append(accuracy_score(expected, predicted))
+            self.test_scores_labels.append(f"{learn_size} ({round(size, 3)}%)")
 
         self.classification.train()
         return predicted, expected
 
-    def display_learning_curve(self):
-        plt.figure(figsize=(10, 8))
-        plt.plot(self.train_sizes, self.test_scores, 'o-', color="g", label="Test score")
-        plt.xticks(self.train_sizes)
-        plt.xlabel("Training data percentage")
-        plt.gca().set_xticklabels(['{:.0f}%'.format(x*100) for x in plt.gca().get_xticks()])
+    def display_learning_curve(self, range_start=0, range_end=0):
+        if range_end == 0:
+            range_end = len(self.train_sizes)
+        plt.figure(figsize=(12, 10))
+        plt.plot(self.train_sizes[range_start:range_end], self.test_scores[range_start:range_end], 'o-', color="g", label="Test score")
+        plt.xticks(self.train_sizes[range_start:range_end], self.test_scores_labels[range_start:range_end])
+        plt.xlabel("Number of training samples")
         plt.ylabel("Accuracy")
         plt.title("Learning Curve")
         plt.xticks(rotation=90)

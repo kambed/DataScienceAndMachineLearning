@@ -23,6 +23,7 @@ class Classification:
         x = data_to_train.iloc[:, :-1].values
         y = data_to_train.iloc[:, -1].values
         self.model.fit(x, y)
+        return data_to_train.index.size, self.test_data.index.size
 
     def predict(self, x):
         return self.model.predict(x)
@@ -30,9 +31,4 @@ class Classification:
     def predict_test_data(self):
         x = self.test_data.iloc[:, :-1].values
         y = self.test_data.iloc[:, -1].values
-        return self.predict(x), y
-
-    def predict_learn_data(self):
-        x = self.learn_data.iloc[:, :-1].values
-        y = self.learn_data.iloc[:, -1].values
         return self.predict(x), y
