@@ -1,4 +1,6 @@
 {
-  "algorithm": "NAIVE_BAYES",
-  "naive_bayes_type": "GAUSSIAN"
+  "algorithm": "SUPPORT_VECTOR",
+  "kernel": "RBF",
+  "c": 1.0,
+  "gamma": "SCALE"
 }
