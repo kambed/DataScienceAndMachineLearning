@@ -8,9 +8,15 @@ from helper.argument_helper import ArgumentHelper
 from helper.confusion_matrix_helper import ConfusionMatrixHelper
 from helper.data_csv_helper import DataCsvHelper
 from helper.data_split_helper import DataSplitHelper
+from helper.normalization_helper import NormalizationType, NormalizationHelper
 from helper.roc_curve_helper import RocCurveHelper
 from helper.learning_curve_helper import LearningCurveHelper
 
+def preprocess_data(learn_data, test_data):
+    if ArgumentHelper.check_if_argument_exists("normalization"):
+        normalizer = NormalizationHelper(ArgumentHelper.get_enum_argument("normalization", NormalizationType))
+        learn_data, test_data = normalizer.preprocess(learn_data, test_data)
+    return learn_data, test_data
 
 def create_classification_algorithm(learn_data, test_data):
     algorithm = ArgumentHelper.get_enum_argument("algorithm", Algorithm)
@@ -45,6 +51,7 @@ if __name__ == '__main__':
     train_step = 0.05
 
     learn_data, test_data = DataCsvHelper.read_csv_data()
+    learn_data, test_data = preprocess_data(learn_data, test_data)
     classification = create_classification_algorithm(learn_data, test_data)
 
     lch = LearningCurveHelper(classification, train_size, train_step)
