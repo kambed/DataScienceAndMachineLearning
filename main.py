@@ -48,7 +48,7 @@ if __name__ == '__main__':
     labels = ['DERMASON', 'SIRA', 'SEKER']
     test_size = 0.3
     train_size = 1 - test_size
-    train_step = 0.05
+    train_step = 0.02
 
     learn_data, test_data = DataCsvHelper.read_csv_data()
     learn_data, test_data = preprocess_data(learn_data, test_data)
