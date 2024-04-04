@@ -1,3 +1,4 @@
+import numpy as np
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix, classification_report, ConfusionMatrixDisplay
 
@@ -20,4 +21,7 @@ class ConfusionMatrixHelper:
             print(f"Precision: {self.classification_report[label]['precision']}")
             print(f"Recall: {self.classification_report[label]['recall']}")
             print(f"F1-score: {self.classification_report[label]['f1-score']}")
-            print(f"Specificity: {1 - float(self.classification_report[label]['recall'])}")
+            label_index = self.labels.index(label)
+            TN = sum(sum(self.confusion_matrix)) - sum(self.confusion_matrix[label_index, :]) - sum(self.confusion_matrix[:, label_index]) + self.confusion_matrix[label_index, label_index]
+            FP = sum(self.confusion_matrix[:, label_index]) - self.confusion_matrix[label_index, label_index]
+            print(f"Specificity: {TN / (TN + FP)}")
