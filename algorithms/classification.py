@@ -32,3 +32,15 @@ class Classification:
         x = self.test_data.iloc[:, :-1].values
         y = self.test_data.iloc[:, -1].values
         return self.predict(x), y
+
+    def predict_train_data(self, learn_data_size=0, learn_data_part=0):
+        if learn_data_size == 0:
+            data_to_predict = self.learn_data
+        else:
+            data_to_predict_size = int(learn_data_part * self.learn_data.index.size / learn_data_size)
+            data_to_predict = self.learn_data.head(data_to_predict_size)
+
+        x = data_to_predict.iloc[:, :-1].values
+        y = data_to_predict.iloc[:, -1].values
+
+        return self.predict(x), y
