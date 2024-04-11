@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Algorithm(Enum):
+class PredictAlgorithm(Enum):
     NAIVE_BAYES = 'NAIVE_BAYES'
     KNN = 'KNN'
     SUPPORT_VECTOR = 'SUPPORT_VECTOR'

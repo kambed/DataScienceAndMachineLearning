@@ -1,6 +1,4 @@
 {
-  "algorithm": "SUPPORT_VECTOR",
-  "kernel": "RBF",
-  "c": 1.0,
-  "gamma": "SCALE"
+  "algorithm": "AGGLOMERATIVE",
+  "n_clusters": 3
 }

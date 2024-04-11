@@ -1,15 +1,15 @@
-from algorithms.algorithm import Algorithm
 from algorithms.decision_tree import DecisionTree
 from algorithms.k_nearest_neighbours import KNearestNeighbours, Metric
 from algorithms.naive_bayes import NaiveBayes, NaiveBayesType
+from algorithms.predict_algorithm import PredictAlgorithm
 from algorithms.random_forest import RandomForest
 from algorithms.support_vector import SupportVector, SupportVectorKernelType, SupportVectorGammaType
 from helper.argument_helper import ArgumentHelper
 from helper.confusion_matrix_helper import ConfusionMatrixHelper
 from helper.data_csv_helper import DataCsvHelper
+from helper.learning_curve_helper import LearningCurveHelper
 from helper.normalization_helper import NormalizationType, NormalizationHelper
 from helper.roc_curve_helper import RocCurveHelper
-from helper.learning_curve_helper import LearningCurveHelper
 
 
 def preprocess_data(learn_data, test_data):
@@ -20,23 +20,23 @@ def preprocess_data(learn_data, test_data):
 
 
 def create_classification_algorithm(learn_data, test_data):
-    algorithm = ArgumentHelper.get_enum_argument("algorithm", Algorithm)
-    if algorithm == Algorithm.NAIVE_BAYES:
+    algorithm = ArgumentHelper.get_enum_argument("algorithm", PredictAlgorithm)
+    if algorithm == PredictAlgorithm.NAIVE_BAYES:
         naive_bayes_type = ArgumentHelper.get_enum_argument("naive_bayes_type", NaiveBayesType)
         return NaiveBayes(learn_data, test_data, naive_bayes_type)
-    elif algorithm == Algorithm.DECISION_TREE:
+    elif algorithm == PredictAlgorithm.DECISION_TREE:
         max_depth = ArgumentHelper.get_int_argument("max_depth")
         min_samples_leaf = ArgumentHelper.get_int_argument("min_samples_leaf")
         return DecisionTree(learn_data, test_data, max_depth, min_samples_leaf)
-    elif algorithm == Algorithm.RANDOM_FOREST:
+    elif algorithm == PredictAlgorithm.RANDOM_FOREST:
         n_estimators = ArgumentHelper.get_int_argument("n_estimators")
         max_features = ArgumentHelper.get_int_argument("max_features")
         return RandomForest(learn_data, test_data, n_estimators, max_features)
-    elif algorithm == Algorithm.KNN:
+    elif algorithm == PredictAlgorithm.KNN:
         n_neighbors = ArgumentHelper.get_int_argument("n_neighbors")
         metric = ArgumentHelper.get_enum_argument("metric", Metric)
         return KNearestNeighbours(learn_data=learn_data, test_data=test_data, n_neighbors=n_neighbors, metric=metric)
-    elif algorithm == Algorithm.SUPPORT_VECTOR:
+    elif algorithm == PredictAlgorithm.SUPPORT_VECTOR:
         kernel = ArgumentHelper.get_enum_argument("kernel", SupportVectorKernelType)
         c = ArgumentHelper.get_float_argument("c")
         gamma = ArgumentHelper.get_enum_argument("gamma", SupportVectorGammaType)
@@ -53,6 +53,7 @@ if __name__ == '__main__':
 
     learn_data, test_data = DataCsvHelper.read_csv_data()
     learn_data, test_data = preprocess_data(learn_data, test_data)
+
     classification = create_classification_algorithm(learn_data, test_data)
 
     lch = LearningCurveHelper(classification, train_size, train_step)
