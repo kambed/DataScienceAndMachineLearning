@@ -13,8 +13,7 @@ class ClusteringAlgorithm:
         X = data_to_fit.drop('Class', axis=1)
         y = data_to_fit['Class']
         labels = self.model.fit_predict(X)
-
-        return labels, X
+        return labels, X, y
 
 
 class Clustering(Enum):
