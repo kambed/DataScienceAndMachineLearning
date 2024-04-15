@@ -1,8 +1,8 @@
 from clustering.agglomerate_clustering import AgglomerateClustering, Linkage
 from clustering.clustering_algorithm import Clustering
-from clustering.clustering_evaluator import ClusteringEvaluator
 from clustering.dbscan import Dbscan
 from helper.argument_helper import ArgumentHelper
+from helper.clustering_evaluator_helper import ClusteringEvaluator
 from helper.data_csv_helper import DataCsvHelper
 
 
