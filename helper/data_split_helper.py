@@ -1,5 +1,6 @@
 from sklearn.model_selection import train_test_split
 
+
 class DataSplitHelper:
     def __init__(self, data, test_size=0.2):
         self.data = data

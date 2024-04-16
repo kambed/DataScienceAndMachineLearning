@@ -1,5 +1,5 @@
 {
   "algorithm": "AGGLOMERATIVE",
-  "n_clusters": 3,
-  "linkage": "WARD"
+  "n_clusters": 4,
+  "linkage": "COMPLETE"
 }
