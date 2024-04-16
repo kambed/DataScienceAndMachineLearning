@@ -6,6 +6,7 @@ from clustering.dbscan import Dbscan
 from helper.argument_helper import ArgumentHelper
 from helper.clustering_evaluator_helper import ClusteringEvaluator
 from helper.data_csv_helper import DataCsvHelper
+from clustering.k_means import KMeansAlgorithm, Init
 
 
 def create_clustering_algorithm(data):
@@ -18,6 +19,10 @@ def create_clustering_algorithm(data):
         eps = ArgumentHelper.get_float_argument("eps")
         min_samples = ArgumentHelper.get_int_argument("min_samples")
         return Dbscan(data, eps, min_samples)
+    elif algorithm == Clustering.K_MEANS:
+        n_clusters = ArgumentHelper.get_int_argument("n_clusters")
+        init = ArgumentHelper.get_enum_argument("init", Init)
+        return KMeansAlgorithm(data, n_clusters, init)
     else:
         raise NotImplementedError(f"Algorithm {algorithm} not found!")
 

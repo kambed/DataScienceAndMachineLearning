@@ -1,5 +1,5 @@
 {
-  "algorithm": "AGGLOMERATIVE",
+  "algorithm": "K_MEANS",
   "n_clusters": 4,
-  "linkage": "COMPLETE"
+  "init": "RANDOM"
 }
