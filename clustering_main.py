@@ -1,3 +1,5 @@
+import numpy as np
+
 from clustering.agglomerate_clustering import AgglomerateClustering, Linkage
 from clustering.clustering_algorithm import Clustering
 from clustering.dbscan import Dbscan
@@ -27,3 +29,7 @@ if __name__ == '__main__':
     clustering = create_clustering_algorithm(data)
     algorithms_labels, X, y = clustering.fit()
     ClusteringEvaluator.evaluate(algorithms_labels, X, y)
+    unique_classes, counts = np.unique(algorithms_labels, return_counts=True)
+    for cls, count in zip(unique_classes, counts):
+        print(f"Class {cls}: {count}.")
+    clustering.create_elbow_inertia_chart(10)
