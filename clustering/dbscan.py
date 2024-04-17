@@ -1,4 +1,7 @@
+import numpy as np
+from matplotlib import pyplot as plt
 from sklearn.cluster import DBSCAN
+from sklearn.neighbors import NearestNeighbors
 
 from clustering.clustering_algorithm import ClusteringAlgorithm
 
@@ -21,5 +24,13 @@ class Dbscan(ClusteringAlgorithm):
         super().__init__(data, model)
 
     def create_elbow_inertia_chart(self, n_clusters_range):
-        # Implement chart creation here
-        pass
+        elbow_data = self.data.drop('Class', axis=1)
+        neighbors = NearestNeighbors(n_neighbors=n_clusters_range)
+        neighbors_fit = neighbors.fit(elbow_data)
+        distances, indices = neighbors_fit.kneighbors(elbow_data)
+        distances = np.sort(distances, axis=0)
+        distances = distances[:, 1]
+        plt.plot(distances)
+        plt.xlim(7750, 8500)
+        plt.ylim(0, 500)
+        plt.show()
