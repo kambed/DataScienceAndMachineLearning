@@ -3,6 +3,7 @@ import numpy as np
 from clustering.agglomerate_clustering import AgglomerateClustering, Linkage
 from clustering.clustering_algorithm import Clustering
 from clustering.dbscan import Dbscan
+from clustering.expectation_maximization import CovarianceType, ExpectationMaximization
 from helper.argument_helper import ArgumentHelper
 from helper.clustering_evaluator_helper import ClusteringEvaluator
 from helper.data_csv_helper import DataCsvHelper
@@ -18,6 +19,10 @@ def create_clustering_algorithm(data):
         eps = ArgumentHelper.get_float_argument("eps")
         min_samples = ArgumentHelper.get_int_argument("min_samples")
         return Dbscan(data, eps, min_samples)
+    elif algorithm == Clustering.EXPECTATION_MAXIMIZATION:
+        n_components = ArgumentHelper.get_int_argument("n_components")
+        covariance_type = ArgumentHelper.get_enum_argument("covariance_type", CovarianceType)
+        return ExpectationMaximization(data, n_components, covariance_type)
     else:
         raise NotImplementedError(f"Algorithm {algorithm} not found!")
 
