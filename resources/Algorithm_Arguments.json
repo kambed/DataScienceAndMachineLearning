@@ -1,5 +1,5 @@
 {
-  "algorithm": "EXPECTATION_MAXIMIZATION",
-  "n_components": 5,
-  "covariance_type": "FULL"
+  "algorithm": "AGGLOMERATIVE",
+  "n_clusters": 3,
+  "linkage": "WARD"
 }

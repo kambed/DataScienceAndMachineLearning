@@ -12,14 +12,6 @@ from clustering.clustering_algorithm import ClusteringAlgorithm
 """
 
 
-def plot_elbow_curve(inertia_values):
-    plt.plot(range(1, len(inertia_values) + 1), inertia_values, marker='o')
-    plt.title('Elbow Curve')
-    plt.xlabel('Number of clusters')
-    plt.ylabel('Inertia')
-    plt.show()
-
-
 def compute_inertia(labels, distance_matrix):
     inertia = 0
     for cluster_label in np.unique(labels):
@@ -41,16 +33,20 @@ class AgglomerateClustering(ClusteringAlgorithm):
         super().__init__(data, model)
 
     def create_elbow_inertia_chart(self, n_clusters_range):
-        inertia_values = []
-        data = self.data
-        X = data.drop('Class', axis=1)
-        distance_matrix = squareform(pdist(X))
-        for n in range(1, n_clusters_range + 1):
-            alg = AgglomerativeClustering(n_clusters=n, linkage=self.linkage.value).fit(X)
+        elbow_data = self.data.drop('Class', axis=1)
+        mean_dist = []
+        distance_matrix = squareform(pdist(elbow_data))
+        number_of_clusters = range(1, n_clusters_range + 1)
+        for n_clusters in number_of_clusters:
+            alg = AgglomerativeClustering(n_clusters=n_clusters, linkage=self.linkage.value)
+            alg.fit(elbow_data)
             inertia = compute_inertia(alg.labels_, distance_matrix)
-            inertia_values.append(inertia)
-
-        plot_elbow_curve(inertia_values)
+            mean_dist.append(inertia)
+        plt.plot(number_of_clusters, mean_dist, marker='o')
+        plt.xlabel('Number of clusters')
+        plt.ylabel('Interia')
+        plt.title('Elbow Curve')
+        plt.show()
 
 
 class Linkage(Enum):

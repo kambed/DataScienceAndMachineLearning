@@ -2,11 +2,10 @@ from enum import Enum
 
 import numpy as np
 from matplotlib import pyplot as plt
-from scipy.spatial.distance import cdist, squareform, pdist
-from sklearn.metrics import silhouette_score
+from scipy.spatial.distance import squareform, pdist
+from sklearn.mixture import GaussianMixture
 
 from clustering.clustering_algorithm import ClusteringAlgorithm
-from sklearn.mixture import GaussianMixture
 
 
 def compute_inertia(labels, distance_matrix):
